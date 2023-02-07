@@ -10,10 +10,18 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.apache.kafka:connect-api:2.5.0'
+    implementation 'org.sl4j:sl4j-simple:1.7.30'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    from{
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
